@@ -14,6 +14,17 @@ public class MainActivity extends AppCompatActivity {
     EditText etNumber;
     Button btnSquare,btnSquareRoot,btnCube;
     TextView tvResult;
+    long bpt;
+
+    @Override
+    public void onBackPressed(){
+        if(bpt + 1500 > System.currentTimeMillis())
+            super.onBackPressed();
+        else
+            Toast.makeText(this, "Press back one more time", Toast.LENGTH_SHORT).show();
+        bpt= System.currentTimeMillis();
+    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle b1) {
@@ -28,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(b2);
 
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
