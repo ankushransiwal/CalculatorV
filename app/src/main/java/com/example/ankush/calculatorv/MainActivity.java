@@ -1,5 +1,6 @@
 package com.example.ankush.calculatorv;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,12 +29,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    etNumber = (EditText)findViewById(R.id.etNumber);
+    int orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+    setRequestedOrientation(orientation);
+
+        etNumber = (EditText)findViewById(R.id.etNumber);
     btnCube = (Button)findViewById(R.id.btnCube);
     btnSquare = (Button)findViewById(R.id.btnSquare);
     btnSquareRoot = (Button)findViewById(R.id.btnSquareRoot);
