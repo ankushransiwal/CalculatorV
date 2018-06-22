@@ -14,18 +14,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnSquare,btnSquareRoot,btnCube;
     TextView tvResult;
 
-    @Override
-    protected void onSaveInstanceState(Bundle b1) {
-        b1.putString("ans",tvResult.getText().toString());
-        super.onSaveInstanceState(b1);
-    }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle b2) {
-        String a = b2.getString("ans");
-        tvResult.setText(a);
-        super.onRestoreInstanceState(b2);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
