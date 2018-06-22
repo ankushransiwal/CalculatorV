@@ -1,6 +1,7 @@
 package com.example.ankush.calculatorv;
 
 import android.content.pm.ActivityInfo;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +10,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText etNumber;
     Button btnSquare,btnSquareRoot,btnCube;
     TextView tvResult;
     long bpt;
+    TextToSpeech tts;
 
     @Override
     public void onBackPressed(){
@@ -45,10 +49,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
     int orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
     setRequestedOrientation(orientation);
 
-        etNumber = (EditText)findViewById(R.id.etNumber);
+    tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        @Override
+        public void onInit(int i) {
+            if(i!=TextToSpeech.ERROR){
+                tts.setLanguage(Locale.ENGLISH);
+            }
+        }
+    });
+
+    etNumber = (EditText)findViewById(R.id.etNumber);
     btnCube = (Button)findViewById(R.id.btnCube);
     btnSquare = (Button)findViewById(R.id.btnSquare);
     btnSquareRoot = (Button)findViewById(R.id.btnSquareRoot);
@@ -66,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
             double number = Double.parseDouble(etNumber.getText().toString());
             double square = number * number;
             tvResult.setText("Square of "+number+" is: "+square);
+            String msg = tvResult.getText().toString();
+            tts.speak(msg,TextToSpeech.QUEUE_FLUSH,null);
         }
     });
 
@@ -80,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
             double number = Double.parseDouble(etNumber.getText().toString());
             double squareRoot = Math.sqrt(number);
             tvResult.setText("Square root of "+number+" is: "+squareRoot);
+            String msg = tvResult.getText().toString();
+            tts.speak(msg,TextToSpeech.QUEUE_FLUSH,null);
         }
     });
 
@@ -94,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
             double number = Double.parseDouble(etNumber.getText().toString());
             double cube = number * number * number;
             tvResult.setText("Cube of "+number+" is: "+cube);
+            String msg = tvResult.getText().toString();
+            tts.speak(msg,TextToSpeech.QUEUE_FLUSH,null);
         }
     });
 
